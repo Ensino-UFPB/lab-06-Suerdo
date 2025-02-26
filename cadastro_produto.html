@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Doguito Petshop | Cadastro de produto</title>
+    <title>Doguito Petshop | Cadastro de Produto</title>
+    <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet"> 
+    <!-- Estilos personalizados -->
     <link rel="stylesheet" href="./assets/css/base/base.css">
     <link rel="stylesheet" href="./assets/css/componentes/cabecalho.css">
     <link rel="stylesheet" href="./assets/css/componentes/cartao.css">
@@ -15,39 +17,74 @@
     <link rel="stylesheet" href="./assets/css/cadastro_produto.css">
 </head>
 <body>
+    <!-- Cabeçalho com logo e navegação -->
     <header class="cabecalho container">
         <img src="./assets/img/doguitoadm.svg" alt="Logo Doguito" class="cabecalho__logo">
         <nav>
             <ul class="cabecalho__lista-navegacao">
                 <li class="cabecalho__link"><a href="#">Dashboard</a></li>
                 <li class="cabecalho__link"><a href="#">Produtos</a></li>
-                <li class="cabecalho__link"><a href="lista_cliente.html">Clientes </a></li>
+                <li class="cabecalho__link"><a href="lista_cliente.html">Clientes</a></li>
                 <li class="cabecalho__link"><a href="#">Pets</a></li>
             </ul>
         </nav>
     </header>
+    
+    <!-- Seção principal do cadastro de produto -->
     <main class="container flex flex--centro flex--coluna">
         <section class="cartao cadastro">
-            <h1 class="cartao__titulo">Cadastrar um produto</h1>
-            <form action="./cadastro_produto_concluido.html" class="flex flex--coluna">
+            <h1 class="cartao__titulo">Cadastrar um Produto</h1>
+            <!-- Formulário de cadastro de produto -->
+            <form action="./cadastro_produto_concluido.html" class="flex flex--coluna" id="formCadastro" method="POST">
+                <!-- Campo de Nome do Produto -->
                 <div class="input-container">
-                    <input name="nome" id="nome" class="input" type="text" placeholder="Nome">
+                    <input name="nome" id="nome" class="input" type="text" placeholder="Nome" data-tipo="nome" required>
                     <label class="input-label" for="nome">Nome</label>
-                    <span class="input-mensagem-erro">Este campo não está válido</span>
+                    <span class="input-mensagem-erro"></span> <!-- Mensagem de erro para o campo Nome -->
                 </div>
+
+                <!-- Campo de Preço do Produto (com máscara) -->
                 <div class="input-container cadastro__preco-container">
-                    <input name="preco" id="preco" class="input" type="text" placeholder="Preço">
+                    <input name="preco" id="preco" class="input" type="text" placeholder="Preço" required>
                     <label class="input-label" for="preco">Preço</label>
-                    <span class="input-mensagem-erro">Este campo não está válido</span>
+                    <span class="input-mensagem-erro"></span> <!-- Mensagem de erro para o campo Preço -->
                 </div>
+
+                <!-- Campo de Quantidade em Estoque -->
+                <div class="input-container">
+                    <input name="quantidade" id="quantidade" class="input" type="number" placeholder="Quantidade em Estoque" data-tipo="quantidade" required>
+                    <label class="input-label" for="quantidade">Quantidade em Estoque</label>
+                    <span class="input-mensagem-erro"></span> <!-- Mensagem de erro para o campo Quantidade -->
+                </div>                
+
+                <!-- Campo de Descrição do Produto -->
                 <div class="input-container cadastro__descricao-container">
-                    <input class="input" name="descricao" id="descricao" placeholder="Descrição">
+                    <input class="input" name="descricao" id="descricao" placeholder="Descrição" required>
                     <label class="input-label" for="descricao">Descrição</label>
-                    <span class="input-mensagem-erro">Este campo não está válido</span>
+                    <span class="input-mensagem-erro"></span> <!-- Mensagem de erro para o campo Descrição -->
                 </div>
-                <button class="botao">Cadastrar produto</button>
+
+                <!-- Botão de envio do formulário -->
+                <button class="botao" type="submit">Cadastrar Produto</button>
             </form>
         </section>
     </main>
+
+    <!-- Script para aplicar a máscara no campo preço -->
+    <script src="https://cdn.jsdelivr.net/npm/simple-mask-money@latest/lib/simple-mask-money.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const campoPreco = document.getElementById('preco');
+            // Aplica a máscara de preço ao campo 'preco'
+            SimpleMaskMoney.setMask(campoPreco, {
+                prefix: 'R$ ',
+                fixed: true,
+                fractionDigits: 2,
+                decimalSeparator: ',',
+                thousandsSeparator: '.',
+                cursor: 'end'
+            });
+        });
+    </script>
 </body>
 </html>
